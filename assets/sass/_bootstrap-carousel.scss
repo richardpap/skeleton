@@ -1,0 +1,146 @@
+
+/*
+-----------------------------------------------------------------
+                         -= CAROUSEL =-
+-----------------------------------------------------------------
+*/
+
+.jcarousel-wrapper {
+  position:relative;
+  h4 {
+    text-transform: uppercase;
+    font-weight:200;
+    color:#333;
+    font-size:18px;
+    padding: 0 30px;
+    text-align: center;
+    margin-top:($grid-gutter-width / 2);
+  }
+  .jcarousel {
+    position: relative;
+    overflow: hidden;
+    ul {
+      width: 20000em;
+      position: relative;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        float: left;
+        width: ($container-lg / 3);
+      }
+    }
+  }
+}
+
+.carousel-control {
+  width:30px;
+  &.left {
+    margin-left:-25px;
+    background-image:none;
+  }
+  &.right {
+    margin-right:-25px;
+    background-image:none;
+  }
+  i {
+    color:#333;
+  }
+}
+
+.jcarousel-control-prev {
+  position:absolute;
+  top:50%;
+  left:0;
+  opacity:1.0;
+  z-index:1001;
+  margin-top:-30px;
+  font-size:30px;
+  color:#333;
+  &.inactive {
+    color:#333;
+  }
+}
+
+.jcarousel-control-next {
+  position:absolute;
+  top:50%;
+  right:0;
+  z-index:1001;
+  opacity:1.0;
+  margin-top:-30px;
+  font-size:30px;
+  color:#333;
+  &.inactive {
+    color:#333;
+  }
+}
+
+
+
+@media (min-width : 320px) and (max-width : 767px) {
+
+  .jcarousel-wrapper {
+    width:($container-xs - $grid-gutter-width);
+    margin-left:auto;
+    margin-right:auto;
+    .jcarousel {
+      ul {
+        li {
+          width: ($container-xs - $grid-gutter-width);
+          padding-left:$grid-gutter-width;
+          padding-right:$grid-gutter-width;
+          img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width : 768px) and (max-width : 991px) {
+  .jcarousel-wrapper {
+    width:($container-sm - $grid-gutter-width);
+    margin-left:auto;
+    margin-right:auto;
+    .jcarousel {
+      ul {
+        li {
+          width: (($container-sm - $grid-gutter-width) / 2);
+          padding-left:($grid-gutter-width / 2);
+          padding-right:($grid-gutter-width / 2);
+          text-align:center;
+          img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin-left:auto;
+            margin-right:auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width : 992px) and (max-width : 1199px) {
+  .jcarousel-wrapper {
+    .jcarousel {
+      ul {
+        li {
+          width: ($container-md / 2);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width : 1200px) and (max-width : 2560px) {
+  .jcarousel li {
+    float: left;
+    width: ($container-lg / 3);
+  }
+}
