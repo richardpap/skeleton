@@ -83,7 +83,7 @@ module.exports = function(grunt) {
             },
             app: {
                 src: ['js/vendors.js'],
-                dest: 'js/app-0.1.0.js'
+                dest: 'js/vendors-0.1.0.js'
             },
             css: {
                 src: ['css/vendors.min.css','css/style.min.css'],
@@ -99,8 +99,8 @@ module.exports = function(grunt) {
                 banner: '/*! <%= pkg.name %> v<%= pkg.version %>, <%= grunt.template.today("yyyy-mm-dd") %> */\n'
             },
             appJs: {
-                src: ['js/app-0.1.0.js'],
-                dest: 'js/app-0.1.0.min.js'
+                src: ['js/vendors-0.1.0.js'],
+                dest: 'js/vendors-0.1.0.min.js'
             }
         },
         versioning: {
@@ -145,7 +145,7 @@ module.exports = function(grunt) {
                         'css/vendors-0.1.0.min.css',
                         'css/style-0.1.0.min.css',
                         'css/print-0.1.0.min.css',
-                        'js/app-0.1.0.js',
+                        'js/vendors-0.1.0.js',
                         'js/app-modules.js'
                     ]
                 },
