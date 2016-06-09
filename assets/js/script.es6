@@ -1,18 +1,14 @@
 'use strict';
 
-import { WebFontLoader } from './modules/webfontloader.es6';
+import { InitPlugins }   from './modules/initPlugins.es6';
 
 
 $(function(window, document, undefined) {
 
 
-	let webfonts = new WebFontLoader();
-	webfonts.init();
-
-
-
-
-
+	let plugins = new InitPlugins();
+	plugins.webfonts().carousel();
+	
 
 
 

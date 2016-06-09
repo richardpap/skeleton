@@ -2,6 +2,13 @@
 // Common but custom classes to extend TWBS
 // --------------------------------------------------
 
+
+$wspace-s:  floor($grid-gutter-width / 2);         //15
+$wspace-m:  floor($grid-gutter-width);             //30
+$wspace-l:  floor(($grid-gutter-width / 2) * 3);   //45
+$wspace-xl: floor($grid-gutter-width * 3);         //90
+
+
 .no-gutter > [class*='col-'] {
   padding-right:0;
   padding-left:0;
@@ -9,58 +16,6 @@
 
 .hidden {
   display:none;
-}
-
-.padding-vertical-0 {
-  padding-top:0;
-  padding-bottom:0;
-}
-
-.padding-vertical-semi {
-  padding-top:($grid-gutter-width / 2);
-  padding-bottom:($grid-gutter-width / 2);
-}
-
-.padding-vertical-1 {
-  padding-top:$grid-gutter-width;
-  padding-bottom:$grid-gutter-width;
-}
-
-.padding-vertical-2 {
-  padding-top:($grid-gutter-width * 2);
-  padding-bottom:($grid-gutter-width * 2);
-}
-
-.padding-vertical-top-0 {
-  padding-top:0;
-}
-
-.padding-vertical-top-semi {
-  padding-top:($grid-gutter-width / 2);
-}
-
-.padding-vertical-top-1 {
-  padding-top:$grid-gutter-width;
-}
-
-.padding-vertical-top-2 {
-  padding-top:($grid-gutter-width * 2);
-}
-
-.padding-vertical-bottom-0 {
-  padding-bottom:0;
-}
-
-.padding-vertical-bottom-semi {
-  padding-bottom:($grid-gutter-width / 2);
-}
-
-.padding-vertical-bottom-1 {
-  padding-bottom:$grid-gutter-width;
-}
-
-.padding-vertical-bottom-2 {
-  padding-bottom:($grid-gutter-width * 2);
 }
 
 
@@ -73,26 +28,22 @@
   height:1px;
 }
 
-.whitespace-light {
-  display:block;
-  height:($grid-gutter-width / 3);
+.whitespace-s {
+  height:$wspace-s;
 }
 
-.whitespace-semi {
-  height:($grid-gutter-width / 2);
+.whitespace-m {
+  height:$wspace-m;
 }
 
-.whitespace-1 {
-  height:$grid-gutter-width;
+.whitespace-l {
+  height:$wspace-l;
 }
 
-.whitespace-2 {
-  height:($grid-gutter-width * 2);
+.whitespace-xl {
+  height:$wspace-xl;
 }
 
-.whitespace-3 {
-  height:($grid-gutter-width * 3);
-}
 
 hr {
   margin-top:$grid-gutter-width;

@@ -73,8 +73,7 @@ module.exports = function(grunt) {
                 src: [
                     'bower_components/modernizr/modernizr.js',
                     'bower_components/jquery/dist/jquery.js',
-                    'bower_components/bootstrap/dist/js/bootstrap.js',
-                    'bower_components/bootstrap-select/js/bootstrap-select.js',
+                    'bower_components/bootstrap-sass/javascript/bootstrap.js',
                     'bower_components/momentjs/min/moment.min.js',
                     'bower_components/webfontloader/webfontloader.js',
                     'bower_components/retina.js/dist/retina.js'

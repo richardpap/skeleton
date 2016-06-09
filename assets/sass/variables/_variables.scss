@@ -1,0 +1,55 @@
+
+//$icon-font-path: "/assets/fonts/glyphicons/";
+//$fa-font-path: "/assets/fonts/fa/";
+
+//Font sizes
+//must define def value on html tag (16px by def)
+
+$x-small: 0.75rem;     //12px
+$small: 0.875rem;      //14px
+$base: 1rem;           //16px
+$large: 1.125rem;      //18px
+$x-large: 1.313rem;    //21px
+$xx-large: 1.5rem;     //24px
+$xxx-large: 2.25rem;   //36px
+
+$open-sans: "Open Sans", Arial, Helvetica, sans-serif;
+
+
+/*
+=====================================================
+@whitespaces
+=====================================================
+*/
+
+
+$wspace-s: floor($grid-gutter-width / 2);
+$wspace-m: floor($grid-gutter-width);
+$wspace-l: floor(($grid-gutter-width / 2) * 3);
+$wspace-xl: floor($grid-gutter-width * 3);
+
+
+/*
+=====================================================
+@colors
+=====================================================
+*/
+
+
+
+$darkgray: #303438;
+$midgray: #74787c;
+$lightgray: #d4d6d8;
+
+$red: #ff2010;
+$lightred: #f0ccc9;
+
+
+$textcolor: $darkgray;
+$bordercolor: rgba(0,0,0,0.1);
+
+$white: #fff;
+$black: #111;
+
+
+
