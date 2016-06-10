@@ -43,6 +43,7 @@ const jshint = require('gulp-jshint');
 const compass = require('gulp-compass');
 const cssmin = require('gulp-cssmin');
 const rename = require('gulp-rename');
+const imagemin = require('gulp-imagemin');
 
 
 
@@ -131,6 +132,12 @@ gulp.task('cssmin', function () {
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest('./css/'));
 });
+
+gulp.task('image-min', () =>
+    gulp.src('./images/*')
+        .pipe(imagemin())
+        .pipe(gulp.dest('./images'))
+);
 
 
 gulp.task('styles',['compass', 'concat-css', 'cssmin']);
