@@ -1,0 +1,52 @@
+//
+// Common but custom classes to extend TWBS
+// --------------------------------------------------
+
+
+$wspace-s:  floor($grid-gutter-width / 2);         //15
+$wspace-m:  floor($grid-gutter-width);             //30
+$wspace-l:  floor(($grid-gutter-width / 2) * 3);   //45
+$wspace-xl: floor($grid-gutter-width * 3);         //90
+
+
+.no-gutter > [class*='col-'] {
+  padding-right:0;
+  padding-left:0;
+}
+
+.hidden {
+  display:none;
+}
+
+
+[class*='whitespace-'] {
+  display:block;
+  clear:both;
+}
+
+.whitespace-clear {
+  height:1px;
+}
+
+.whitespace-s {
+  height:$wspace-s;
+}
+
+.whitespace-m {
+  height:$wspace-m;
+}
+
+.whitespace-l {
+  height:$wspace-l;
+}
+
+.whitespace-xl {
+  height:$wspace-xl;
+}
+
+
+hr {
+  margin-top:$grid-gutter-width;
+  margin-bottom:$grid-gutter-width;
+  border-color:$bordercolor;
+}

@@ -10,6 +10,11 @@
 	 	gulp-concat 
 	 	gulp-uglify 
 	 	gulp-jshint 
+
+
+	 	gulp-compass
+	 	gulp-cssmin
+
 	 	
 
 	 	gulp-ruby-sass 
@@ -35,10 +40,19 @@ const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 const jshint = require('gulp-jshint');
 
+const compass = require('gulp-compass');
+const cssmin = require('gulp-cssmin');
+const rename = require('gulp-rename');
 
-gulp.task('test', function() {
-  console.log('hello');
-});
+
+
+
+/*
+=================================================================
+ @ JS related tasks
+=================================================================
+*/
+
 
 
 gulp.task('babel', () => {
@@ -56,17 +70,22 @@ gulp.task('browserify', function() {
 });
 
 
-gulp.task('concat', function() {
-  return return gulp.src(['./lib/file3.js', './lib/file1.js', './lib/file2.js'])
+gulp.task('concat-js', function() {
+  return gulp.src(['bower_components/modernizr/modernizr.js',
+                   'bower_components/jquery/dist/jquery.js',
+                   'bower_components/bootstrap-sass/javascript/bootstrap.js',
+                   'bower_components/momentjs/min/moment.min.js',
+                   'bower_components/webfontloader/webfontloader.js',
+                   'bower_components/retina.js/dist/retina.js'])
     .pipe(concat('all.js'))
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest('js/'));
 });
 
 
 gulp.task('compress', function() {
-  return gulp.src('lib/*.js')
+  return gulp.src('js/vendors.js')
     .pipe(uglify())
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('js/'));
 });
 
 
@@ -75,6 +94,48 @@ gulp.task('lint', function() {
     .pipe(jshint())
     .pipe(jshint.reporter('YOUR_REPORTER_HERE'));
 });
+
+gulp.task('script',['babel','concat-js','compress']);
+
+
+
+
+
+/*
+=================================================================
+ @ CSS related tasks
+=================================================================
+*/
+
+gulp.task('concat-css', function() {
+  return gulp.src(['bower_components/fancybox/source/jquery.fancybox.css',
+                   'bower_components/fancybox/source/helpers/jquery.fancybox-thumbs.css'])
+    .pipe(concat('vendors.css'))
+    .pipe(gulp.dest('./css/'));
+});
+
+
+gulp.task('compass', function() {
+  gulp.src('./sass/style.scss')
+    .pipe(compass({
+      config_file: './config.rb',
+      css: 'css',
+      sass: 'sass'
+    }))
+    .pipe(gulp.dest('./css/'));
+});
+
+gulp.task('cssmin', function () {
+	gulp.src(['./css/style.css','./css/vendors.css'])
+		.pipe(cssmin())
+		.pipe(rename({suffix: '.min'}))
+		.pipe(gulp.dest('./css/'));
+});
+
+
+gulp.task('styles',['compass', 'concat-css', 'cssmin']);
+
+
 
 // // Styles
 // gulp.task('styles', function() {
