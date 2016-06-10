@@ -33,18 +33,22 @@
  */
 
 // Load plugins
-const gulp = require('gulp');
-const babel = require('gulp-babel');
-const browserify = require('gulp-browserify');
-const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
-const jshint = require('gulp-jshint');
+var gulp       = require('gulp');
+var fs         = require("fs");
 
-const compass = require('gulp-compass');
-const cssmin = require('gulp-cssmin');
-const rename = require('gulp-rename');
-const imagemin = require('gulp-imagemin');
 
+var babelify   = require('babelify');
+var browserify = require('browserify');
+var concat     = require('gulp-concat');
+var uglify     = require('gulp-uglify');
+var jshint     = require('gulp-jshint');
+
+
+var compass    = require('gulp-compass');
+var cssmin     = require('gulp-cssmin');
+var rename     = require('gulp-rename');
+var imagemin   = require('gulp-imagemin');
+var versioning = require("gulp-version-tag");
 
 
 
@@ -56,19 +60,26 @@ const imagemin = require('gulp-imagemin');
 
 
 
-gulp.task('babel', () => {
-	return gulp.src('src/app.js')
+gulp.task('babelify', () => {
+	return gulp.src('./js/script.es6')
 		.pipe(babel({presets: ['es2015']}))
-		.pipe(gulp.dest('dist'));
+		.pipe(gulp.dest('./js/es6.js'));
 });
 
 
-gulp.task('browserify', function() {
-	// Single entry point to browserify 
-	gulp.src('src/js/app.js')
-		.pipe(browserify({insertGlobals : true,debug : !gulp.env.production}))
-		.pipe(gulp.dest('./build/js'))
+
+
+gulp.task('browserify', function(){
+  gulp.src('./js/script.es6')
+    .pipe(browserify('./script.js')
+		  .transform('babelify', {presets: ['es2015','react']})  
+		  .bundle()
+  		  .pipe(fs.createWriteStream('app-modules.js'))
+  	)
+    .pipe(gulp.dest('./js'));
 });
+
+
 
 
 gulp.task('concat-js', function() {
@@ -96,7 +107,7 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('YOUR_REPORTER_HERE'));
 });
 
-gulp.task('script',['babel','concat-js','compress']);
+gulp.task('script',['babel', 'browserify', 'concat-js','compress']);
 
 
 
@@ -140,68 +151,14 @@ gulp.task('image-min', () =>
 );
 
 
-gulp.task('styles',['compass', 'concat-css', 'cssmin']);
+gulp.task('versioning-css', () => {
+	gulp.src('./css/*.min.css')
+	.pipe(versioning(__dirname,'./package.json'))
+	.pipe(gulp.dest('./css'));
+});
+
+
+gulp.task('styles',['compass', 'concat-css', 'cssmin', 'versioning-css']);
 
 
 
-// // Styles
-// gulp.task('styles', function() {
-//   return sass('src/styles/main.scss', { style: 'expanded' })
-//     .pipe(autoprefixer('last 2 version'))
-//     .pipe(gulp.dest('dist/styles'))
-//     .pipe(rename({ suffix: '.min' }))
-//     .pipe(cssnano())
-//     .pipe(gulp.dest('dist/styles'))
-//     .pipe(notify({ message: 'Styles task complete' }));
-// });
-
-// // Scripts
-// gulp.task('scripts', function() {
-//   return gulp.src('src/scripts/**/*.js')
-//     .pipe(jshint('.jshintrc'))
-//     .pipe(jshint.reporter('default'))
-//     .pipe(concat('main.js'))
-//     .pipe(gulp.dest('dist/scripts'))
-//     .pipe(rename({ suffix: '.min' }))
-//     .pipe(uglify())
-//     .pipe(gulp.dest('dist/scripts'))
-//     .pipe(notify({ message: 'Scripts task complete' }));
-// });
-
-// // Images
-// gulp.task('images', function() {
-//   return gulp.src('src/images/**/*')
-//     .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
-//     .pipe(gulp.dest('dist/images'))
-//     .pipe(notify({ message: 'Images task complete' }));
-// });
-
-// // Clean
-// gulp.task('clean', function() {
-//   return del(['dist/styles', 'dist/scripts', 'dist/images']);
-// });
-
-// // Default task
-// gulp.task('default', ['clean'], function() {
-//   gulp.start('styles', 'scripts', 'images');
-// });
-
-// // Watch
-// gulp.task('watch', function() {
-
-//   // Watch .scss files
-//   gulp.watch('src/styles/**/*.scss', ['styles']);
-
-//   // Watch .js files
-//   gulp.watch('src/scripts/**/*.js', ['scripts']);
-
-//   // Watch image files
-//   gulp.watch('src/images/**/*', ['images']);
-
-//   // Create LiveReload server
-//   livereload.listen();
-
-//   // Watch any files in dist/, reload on change
-//   gulp.watch(['dist/**']).on('change', livereload.changed);
-
-// });
