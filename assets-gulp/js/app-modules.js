@@ -1,40 +1,39 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-var _webfontloader = require('./modules/webfontloader.es6');
+var _initPlugins = require('./modules/initPlugins.es6');
 
 $(function (window, document, undefined) {
 
-	var webfonts = new _webfontloader.WebFontLoader();
-	webfonts.init();
+	var plugins = new _initPlugins.InitPlugins();
+	plugins.webfonts().carousel();
 }(window, document));
 
+},{"./modules/initPlugins.es6":2}],2:[function(require,module,exports){
+class InitPlugins {
 
-},{"./modules/webfontloader.es6":2}],2:[function(require,module,exports){
-'use strict';
+	constructor() {}
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	webfonts() {
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+		WebFont.load({
+			google: {
+				families: ['Ubuntu:400,300,400italic,700,500:latin,latin-ext']
+			}
+		});
 
-var WebFontLoader = function () {
-	function WebFontLoader() {
-		_classCallCheck(this, WebFontLoader);
+		return this;
 	}
 
-	_createClass(WebFontLoader, [{
-		key: 'init',
-		value: function init() {
+	carousel() {
 
-			WebFont.load({
-				google: {
-					families: ['Open Sans:300,400,500,700:latin-ext']
-				}
-			});
+		if ($('#splash-slider').length) {
+			$('#splash-slider').carousel();
 		}
-	}]);
 
-	return WebFontLoader;
-}();
+		return this;
+	}
+
+}
 
 },{}]},{},[1]);

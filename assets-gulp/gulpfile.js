@@ -37,18 +37,18 @@ var gulp       = require('gulp');
 var fs         = require("fs");
 
 
-var babelify   = require('babelify');
-var browserify = require('browserify');
+const babel    = require('gulp-babel');
 var concat     = require('gulp-concat');
 var uglify     = require('gulp-uglify');
 var jshint     = require('gulp-jshint');
+var gulpBrowser = require("gulp-browser");
 
 
 var compass    = require('gulp-compass');
 var cssmin     = require('gulp-cssmin');
 var rename     = require('gulp-rename');
 var imagemin   = require('gulp-imagemin');
-var versioning = require("gulp-version-tag");
+var versioning = require('gulp-version-tag');
 
 
 
@@ -60,26 +60,24 @@ var versioning = require("gulp-version-tag");
 
 
 
-gulp.task('babelify', () => {
-	return gulp.src('./js/script.es6')
-		.pipe(babel({presets: ['es2015']}))
-		.pipe(gulp.dest('./js/es6.js'));
+gulp.task('babel', () => {
+  return gulp.src('js/app-modules.es6')
+    .pipe(babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest('js'));
 });
 
 
-
-
-gulp.task('browserify', function(){
-  gulp.src('./js/script.es6')
-    .pipe(browserify('./script.js')
-		  .transform('babelify', {presets: ['es2015','react']})  
-		  .bundle()
-  		  .pipe(fs.createWriteStream('app-modules.js'))
-  	)
-    .pipe(gulp.dest('./js'));
-});
-
-
+gulp.task('browser',function() {
+      var stream = gulp.src('./js/app-modules.js')
+          .pipe(gulpBrowser.browserify({
+            transform: ['babelify'],
+            presets: ['es2015']
+          })) // gulp.browserify() accepts an optional array of tansforms
+          .pipe(gulp.dest("./js/"));
+      return stream;
+  });
 
 
 gulp.task('concat-js', function() {
@@ -107,7 +105,7 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('YOUR_REPORTER_HERE'));
 });
 
-gulp.task('script',['babel', 'browserify', 'concat-js','compress']);
+gulp.task('script',['babel', 'browser', 'concat-js','compress']);
 
 
 
